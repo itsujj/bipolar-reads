@@ -1,0 +1,23 @@
+{
+  "name": "bipolar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itsujj/bipolar-reads.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/itsujj/bipolar-reads/issues"
+  },
+  "homepage": "https://github.com/itsujj/bipolar-reads#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
