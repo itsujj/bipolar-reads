@@ -1,0 +1,75 @@
+
+body {
+    --pink: #FF1C68;
+    --green: #14D790;
+    --blue: #198FE3;
+    --black: #21282D;
+    --purple: #9B65DE;
+    color: #222;
+    font-family: 'PT Sans', sans-serif;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .popmotion-container-none{
+      display: none;
+  }
+  .popmotion-container-flex{
+      height: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+  }
+  .pen {
+    flex: 1 1 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    margin: 0 auto;
+    flex: 1 1 100%;
+    width: 100%;
+    max-width: 600px;
+    padding: 0 20px;
+  }
+  
+  h1 {
+    font-size: 32px;
+    line-height: 28px;
+    margin-bottom: 10px;
+  }
+  
+  .pen a {
+    color: var(--blue);
+    text-decoration: none;
+    margin-bottom: 70px;
+  }
+  
+  .balls {
+    display: flex;
+    align-items: stretch;
+    height: 20px;
+    position: relative;
+  }
+  .ball {
+      background: var(--purple);
+      border-radius: 50%;
+      margin-right: 10px;
+      width:30px;
+      height:30px;
+  }
+  
+  balls:nth-child(4n + 2) {
+        background: var(--green);
+      }
+  
+  balls:nth-child(4n + 3) {
+        background: var(--pink);
+      }
+  
+  balls:nth-child(4n + 4) {
+        background: var(--blue);
+      }

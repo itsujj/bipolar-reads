@@ -1,0 +1,96 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(http-equiv='X-UA-Compatible', content='ie=edge')
+    title Document
+    // Bootstrap CSS
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css', integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh', crossorigin='anonymous')
+    style.
+      *{
+      padding: 0px;
+      margin: 0px;
+      }
+      p{
+      margin-top:4px;
+      margin-bottom: 4px;
+      }
+      img{
+      width: 50%;
+      border:1px solid grey
+      }
+      textarea {
+      width: 100%;
+      height: 50px;
+      box-sizing: border-box;
+      border: 2px solid #ccc;
+      border-radius: 4px;
+      background-color: #f8f8f8;
+      font-size: 16px;
+      resize: none;
+      }
+      input[type=text]{
+      border-radius: 4px;
+      background-color: #f8f8f8;
+      font-size: 16px;
+      }
+      .center-content-vertically{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      }
+      .center-content{
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      }
+      .center-content-vertically-space-between{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      }
+  body
+    .container-fluid
+      .container
+        .row
+          .col-sm-12.center-content-vertically-space-between(style='height:100px; background-color: lavender;')
+            .search-div
+              input(type='text', name='search-term')
+              button Search
+            .upload-button
+              button.btn.btn-info.btn-lg(type='button', data-toggle='modal', data-target='#myModal') Upload Content
+        each book, i in books
+          .row
+            .col-sm-6.center-content(style='background-color: lightskyblue; padding: 5px;')
+              img(src='#{book.img_url}')
+            .col-sm-6.center-content-vertically(style='background-color: lightgray;')
+              p.book-title #{book.title}
+              p.book-description
+                | #{book.description}
+          hr
+      // Trigger the modal with a button
+      // Modal
+      #myModal.modal.fade(role='dialog')
+        .modal-dialog
+          // Modal content
+          .modal-content
+            form(action='/upload', method='POST', enctype='multipart/form-data')
+              .modal-header
+                h4.modal-title Fill in the details
+              .modal-body
+                p Content Title
+                input(type='text', name='contentTitle', placeholder='Please enter content title')
+                p Content Description
+                textarea#subject(name='contentDescription', placeholder='Please write the description..', style='height:50px')
+                p Choose a file
+                input(type='file', name='avatar')
+              .modal-footer
+                button.btn.btn-default(type='submit') Upload
+                button.btn.btn-default(type='button', data-dismiss='modal') Close
+    // jQuery first, then Popper.js, then Bootstrap JS
+    script(src='https://code.jquery.com/jquery-3.4.1.slim.min.js', integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n', crossorigin='anonymous')
+    script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js', integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo', crossorigin='anonymous')
+    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js', integrity='sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6', crossorigin='anonymous')

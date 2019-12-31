@@ -1,0 +1,140 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0')
+    meta(http-equiv='X-UA-Compatible', content='ie=edge')
+    title Document
+    // Bootstrap CSS
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css', integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh', crossorigin='anonymous')
+    // External stylesheet
+    link(rel='stylesheet', href='/style.css')
+    // Google Font
+    link(href='https://fonts.googleapis.com/css?family=Roboto&display=swap', rel='stylesheet')
+    // Font Awesome
+    script(src='https://use.fontawesome.com/c6da161cd8.js')
+    // Popmotion
+    script(src='https://unpkg.com/popmotion/dist/popmotion.global.min.js')
+    link(rel='stylesheet', href='/popmotion.css')
+  body.desktop-body
+    .container-fluid
+      #top-bar
+        #top-bar-content.container
+          #hamburger
+            .line1
+            .line2
+            .line3
+          #category
+            select
+              option Browse by category
+              option Self Care
+              option Family Education
+              option Case Studies
+              option Miscellaneous
+          #search-bar
+            form(action='/searchapi', method='POST')
+              input(type='text', name='searchTerm', placeholder='Look for a book...', required='')
+              button(type='submit')
+                i.fa.fa-search
+        .slide-bar
+          #slide-bar-headline
+            h5 Browse by category
+          ul
+            li
+              a(href='/') All
+            li
+              a(href='/category/self-care') Self Care
+            li
+              a(href='/category/family-education') Family Education
+            li
+              a(href='/category/case-studies') Case Studies
+            li
+              a(href='/category/miscellaneous') Miscellaneous
+      .container
+        #book-list
+          - var b = 0
+            if books.length == 0
+              p Sorry no books available in this category
+            else
+          - for (var x = 0; x < books.length; x++)
+            if b == books.length
+              - break
+            .row
+              - for (var y = 0; y < 3; y++)
+                if b == books.length
+                  - break
+                .col-md-4.book-column
+                  .book-details-container
+                    .book-image
+                      img(src="#{books[b].img_url}")
+                    .book-description-box
+                      p.book-title #{books[b].title}
+                      p.book-author
+                        span(style='font-weight: bold; font-size:13px;color: #191970;') Author: #{books[b].author}
+                        | 
+                      p.book-summary
+                        | #{books[b].description}
+                    .book-category
+                      p
+                        span(style='font-weight: bold;font-size:13px;  color: #191970;') Category:
+                        |  #{books[b].category}
+                      p
+                        a(href="#{books[b].pdf_url}", target='_blank') View
+                    - b++
+    // Trigger the modal with a button
+    #myModal.modal.fade(role='dialog')
+      .modal-dialog
+        // Modal content
+        .modal-content
+          form(action='/upload',name="uploadForm", method='POST', enctype='multipart/form-data')
+            .modal-header
+              h4.modal-title Fill in the details
+            .modal-body
+              input(type='text', name='contentTitle', placeholder='Please enter book title', required='')
+              input(type='text', name='author', placeholder='Please enter author name', required='')
+              textarea#subject(name='contentDescription', placeholder='Please write a description in 92 characters..', rows='3', cols='50', maxlength='92', required='')
+              select(name='selectedBookCategory')
+                option(value='category-value', name="categoryvalue") Choose a category
+                option(value='Self Care', name="selfcare") Self Care
+                option(value='Family Education', name="familyeducation") Family Education
+                option(value='Case Studies', name="casestudies") Case Studies
+                option(value='Miscellaneous', name="miscellaneous") Miscellaneous
+              br
+              input(type='file', name='avatar', required='')
+            .modal-footer
+              button(type='submit', onclick='displayPopmotion()') Upload
+              button(type='button', data-dismiss='modal') Close
+            .popmotion-container-none
+              div(style='font-weight: bold; letter-spacing: 1px;')
+                | Uploading
+              .balls
+                .ball
+                .ball
+                .ball
+                .ball
+    div
+      a#home(href='/')
+        i.fa.fa-home
+      button#upload-button(type='button', data-toggle='modal', data-target='#myModal') +
+    // jQuery first, then Popper.js, then Bootstrap JS
+    script(src='https://code.jquery.com/jquery-3.4.1.slim.min.js', integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n', crossorigin='anonymous')
+    script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js', integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo', crossorigin='anonymous')
+    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js', integrity='sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6', crossorigin='anonymous')
+    script.
+      const navSlide = () =>{
+      const burger = document.querySelector('#hamburger')
+      const body = document.body
+      const slideBar = document.querySelector('.slide-bar')
+      const line1 = document.querySelector('.line1')
+      const line2 = document.querySelector('.line2')
+      const line3 = document.querySelector('.line3')
+      burger.addEventListener('click', ()=>{
+      body.classList.toggle('mobile-body')
+      line1.classList.toggle('line1-after-click')
+      line2.classList.toggle('line2-after-click')
+      line3.classList.toggle('line3-after-click')
+      slideBar.classList.toggle('slide-bar-active')
+      })
+      }
+      navSlide()
+    script(src='/displayPopmotion.js')
